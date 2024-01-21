@@ -151,8 +151,7 @@ class TrigramPlayer(Player):
             trigram = tuple(sequence[-4:-1])
             choice = sequence[-1]
             targets = self.trigrams.get(trigram, [])
-            if (choice not in targets):
-                targets.append(choice)
+            targets.append(choice)
             self.trigrams[trigram] = targets
 
 
