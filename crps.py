@@ -198,3 +198,9 @@ def play_game(p1, p2, rounds=100):
     print(f"{p1.name}: {(p1_total / total) * 100}%")
     print(f"{p2.name}: {(p2_total / total) * 100}%")
     print(f"Drawn games: {(no_total / total) * 100}%")
+
+
+if __name__ == "__main__":
+    p1 = HumanPlayer("1UP")
+    p2 = TrigramPlayer("CPU")
+    play_game(p1, p2, 10)
