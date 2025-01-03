@@ -139,8 +139,8 @@ class TrigramPlayer(Player):
                 idx = random.randint(0, len(previous_choices) - 1)
                 choice = previous_choices[idx]
             else:
-                choice = random.randint(ROCK, SCISSORS)
-        return choice
+                choice = previous_choices[0]
+        return self.BEATEN_BY[choice]
 
 
     def record(self, game_details):
