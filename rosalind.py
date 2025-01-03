@@ -22,14 +22,14 @@ class NucleotideSequence(GeneticSequence):
         super().__init__(sequence, alphabet)
 
     
-    def count(self, nucleotide):
+    def _count(self, nucleotide):
         if nucleotide not in self.alphabet:
             raise SequenceError("Nucleotide not valid for this sequence.")
         return len([x for x in self.sequence if x == nucleotide.upper()])
         
 
     def percentage_gc(self):
-        return (self.count('C') + self.count('G')) / len(self.sequence)
+        return (self._count('C') + self._count('G')) / len(self.sequence)
     
 
     def point_mutations(self, other):
@@ -52,19 +52,19 @@ class DnaSequence(NucleotideSequence):
 
 
     def count_a(self):
-        return self.count('A')
+        return self._count('A')
 
 
     def count_c(self):
-        return self.count('C')
+        return self._count('C')
     
 
     def count_g(self):
-        return self.count('G')
+        return self._count('G')
 
 
     def count_t(self):
-        return self.count('T')
+        return self._count('T')
     
 
     def reverse_compliment(self):
@@ -72,7 +72,9 @@ class DnaSequence(NucleotideSequence):
             'A' : 'T',
             'T' : 'A',
             'C' : 'G',
-            'G' : 'C' }
+            'G' : 'C'
+        }
+
         complimented_sequence = []
         for n in self.sequence:
             complimented_sequence.append(compliments[n])
@@ -87,16 +89,16 @@ class RnaSequence(NucleotideSequence):
 
 
     def count_a(self):
-        return self.count('A')
+        return self._count('A')
 
 
     def count_c(self):
-        return self.count('C')
+        return self._count('C')
     
 
     def count_g(self):
-        return self.count('G')
+        return self._count('G')
 
 
     def count_u(self):
-        return self.count('U')
+        return self._count('U')
