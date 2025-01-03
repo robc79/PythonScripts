@@ -13,64 +13,67 @@ class GeneticSequence:
         if not pattern.match(sequence.upper()):
             raise SequenceError("Invalid characters found in sequence.")
         self.sequence = sequence.upper()
-
-
-class NucleotideCounter:
-    """ Class for counting nucleotides in a sequence. """
-    def __init__(self, alphabet):
         self.alphabet = alphabet.upper()
+
+
+class NucleotideSequence(GeneticSequence):
+    """ Base class for all nucleotide sequences. """
+    def __init__(self, sequence, alphabet):
+        super().__init__(sequence, alphabet)
+
     
-
-    def count(self, nucleotide, sequence):
-        """ Count occurrences of nucleotide in the given sequence. """
+    def count(self, nucleotide):
         if nucleotide not in self.alphabet:
-            raise SequenceError("Nucleotide not valid for sequence.")
-        return len([x for x in sequence if x == nucleotide])
+            raise SequenceError("Nucleotide not valid for this sequence.")
+        return len([x for x in self.sequence if x == nucleotide.upper()])
+        
+
+    def percentage_gc(self):
+        return (self.count('C') + self.count('G')) / len(self.sequence)
 
 
-class DnaSequence(GeneticSequence):
+
+class DnaSequence(NucleotideSequence):
     """ Represents a DNA sequence. """
     def __init__(self, sequence):
         alphabet = "ACGT"
         super().__init__(sequence, alphabet)
-        self.nucleotide_counter = NucleotideCounter(alphabet)
-    
+
 
     def count_a(self):
-        return self.nucleotide_counter.count('A', self.sequence)
+        return self.count('A')
 
 
     def count_c(self):
-        return self.nucleotide_counter.count('C', self.sequence)
+        return self.count('C')
     
 
     def count_g(self):
-        return self.nucleotide_counter.count('G', self.sequence)
+        return self.count('G')
 
 
     def count_t(self):
-        return self.nucleotide_counter.count('T', self.sequence)
+        return self.count('T')
 
 
-class RnaSequence(GeneticSequence):
+class RnaSequence(NucleotideSequence):
     """ Represents an RNA sequence. """
     def __init__(self, sequence):
         alphabet = "ACGU"
         super().__init__(sequence, alphabet)
-        self.nucleotide_counter = NucleotideCounter(alphabet)
 
 
     def count_a(self):
-        return self.nucleotide_counter.count('A', self.sequence)
+        return self.count('A')
 
 
     def count_c(self):
-        return self.nucleotide_counter.count('C', self.sequence)
+        return self.count('C')
     
 
     def count_g(self):
-        return self.nucleotide_counter.count('G', self.sequence)
+        return self.count('G')
 
 
     def count_u(self):
-        return self.nucleotide_counter.count('U', self.sequence)
+        return self.count('U')
