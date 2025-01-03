@@ -30,7 +30,18 @@ class NucleotideSequence(GeneticSequence):
 
     def percentage_gc(self):
         return (self.count('C') + self.count('G')) / len(self.sequence)
+    
 
+    def point_mutations(self, other):
+        if type(other) != type(self):
+            raise SequenceError("Sequences must be of the same type.")
+        if len(other.sequence) != len(self.sequence):
+            raise SequenceError("Sequences must be of the same length.")
+        mutations = 0
+        for a, b in zip(self.sequence, other.sequence):
+            if a != b:
+                mutations += 1
+        return mutations
 
 
 class DnaSequence(NucleotideSequence):
