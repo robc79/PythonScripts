@@ -65,6 +65,18 @@ class DnaSequence(NucleotideSequence):
 
     def count_t(self):
         return self.count('T')
+    
+
+    def reverse_compliment(self):
+        compliments = { 
+            'A' : 'T',
+            'T' : 'A',
+            'C' : 'G',
+            'G' : 'C' }
+        complimented_sequence = []
+        for n in self.sequence:
+            complimented_sequence.append(compliments[n])
+        return DnaSequence("".join(complimented_sequence))
 
 
 class RnaSequence(NucleotideSequence):
